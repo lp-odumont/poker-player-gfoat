@@ -1,6 +1,6 @@
 
 class Player:
-    VERSION = "Greatest Folder of all times v0.0.6"
+    VERSION = "Greatest Folder of all times v0.0.7"
 
     def betRequest(self, game_state):
         own_card = game_state['players'][game_state['in_action']]["hole_cards"]
@@ -15,13 +15,13 @@ class Player:
 
     def strength(self, hand):
         if self.is_four(hand):
-            return 7
+            return 64
         if self.is_full_house(hand):
-            return 6
+            return 32
         if self.is_straight(hand):
-            return 5
+            return 16
         if self.is_three(hand):
-            return 4
+            return 8
         if self.is_two_pairs(hand):
             return 3
         if  self.is_pair(hand):
@@ -32,9 +32,12 @@ class Player:
     
     def compute_bet(self,own_hand,community_hand):
         rel_strength = self.strength(own_hand+community_hand) - self.strength(community_hand)
-        if(rel_strength == 0):
+
+        if(rel_strength < len(community_hand)):
             return 0
-        return 2**rel_strength
+        
+                
+        return rel_strength-len(community_hand)
         
 
 
