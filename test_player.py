@@ -14,7 +14,7 @@ class PlayerTest(unittest.TestCase):
         """Common setup for all tests."""
         self.player = Player()
         # Example game_state from http://leanpoker.org/player-api
-        self.game_state = {
+        self.game_state_with_community_cards = {
             "tournament_id":"550d1d68cd7bd10003000003",     # Id of the current tournament
             "game_id":"550da1cb2d909006e90004b1",           # Id of the current sit'n'go game. You can use this to link a
                                                             # sequence of game states together for logging purposes, or to
@@ -89,22 +89,31 @@ class PlayerTest(unittest.TestCase):
                 }
             ]
         }
+        self.game_state_without_community_cards = dict(self.game_state_with_community_cards)
+        self.game_state_without_community_cards['community_cards'] = []
 
 
     def test_version(self):
         """Test the version string."""
         self.assertTrue(isinstance(self.player.VERSION, str), "Version needs to be a string")
 
-    def test_betRequest(self):
+    def test_betRequestWithCommunityCards(self):
         """Test the betRequest method."""
-        return_value = self.player.betRequest(game_state=self.game_state)
+        return_value = self.player.betRequest(game_state=self.game_state_without_community_cards)
+        print("Returning %d" % return_value)
+        self.assertTrue(isinstance(return_value, int), "Not returning an integer.")
+        self.assertGreaterEqual(return_value, 0, "No negative return values allowed")
+
+    def test_betRequestWithoutCommunityCards(self):
+        """Test the betRequest method."""
+        return_value = self.player.betRequest(game_state=self.game_state_without_community_cards)
         print("Returning %d" % return_value)
         self.assertTrue(isinstance(return_value, int), "Not returning an integer.")
         self.assertGreaterEqual(return_value, 0, "No negative return values allowed")
 
     def test_showdown(self):
         """Test the showdown method."""
-        self.player.showdown(game_state=self.game_state)
+        self.player.showdown(game_state=self.game_state_with_community_cards)
 
 if __name__ == "__main__":
     # Automatically executes all test methods (starting with test_) in unittest.TestCase classes
