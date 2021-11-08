@@ -61,4 +61,17 @@ class Player:
     def is_full_house(self, hand):
         return self.is_two_pairs(hand) and self.is_three(hand)
 
+    def is_straight(self, hand):
+        rank_array = [str(i) for i in range(2, 11)] + ['J', 'Q', 'K', 'A']
+        ranks = sorted([card['rank'] for card in hand])
+        run = 0;
+        for i in range(1, len(ranks)):
+            if rank_array.index(ranks[i]) - rank_array.index(ranks[i-1]) == 1:
+                run += 1
+                if run >= 4:
+                    return True
+            else:
+                run = 0
+        return False
+        
         

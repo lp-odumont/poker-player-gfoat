@@ -151,6 +151,7 @@ class PlayerTest(unittest.TestCase):
         self.assertFalse(self.player.is_three(hand3))
         self.assertFalse(self.player.is_four(hand3))
         self.assertTrue(self.player.is_two_pairs(hand3))
+        self.assertFalse(self.player.is_straight(hand3))
 
         hand4 = [
             {"rank": '10', "suit": 'spades'},
@@ -165,6 +166,23 @@ class PlayerTest(unittest.TestCase):
         self.assertFalse(self.player.is_four(hand4))
         self.assertTrue(self.player.is_two_pairs(hand4))
         self.assertTrue(self.player.is_full_house(hand4))
+        self.assertFalse(self.player.is_straight(hand4))
+
+        hand5 = [
+            {"rank": '2', "suit": 'spades'},
+            {"rank": '6', "suit": 'clubs'}, 
+            {"rank": '3', "suit": 'diamonds'},
+            {"rank": '2', "suit": 'hearts'},
+            {"rank": '10', "suit": 'clubs'},
+            {"rank": '4', "suit": 'hearts'},
+            {"rank": '5', "suit": 'hearts'},
+        ]
+        self.assertTrue(self.player.is_pair(hand5))
+        self.assertFalse(self.player.is_three(hand5))
+        self.assertFalse(self.player.is_four(hand5))
+        self.assertFalse(self.player.is_two_pairs(hand5))
+        self.assertFalse(self.player.is_full_house(hand5))
+        self.assertTrue(self.player.is_straight(hand5))
 
         
 
