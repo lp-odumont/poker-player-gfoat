@@ -39,6 +39,7 @@ class Player:
 
     def is_two_pairs(self, hand):
         ranks = [card['rank'] for card in hand]
-        counts = set(ranks.count(r) for r in ranks)
+        unique_ranks = set(ranks)
+        counts = [ranks.count(r) for r in unique_ranks]
         return len([c for c in counts if c >= 2]) >= 2
         
