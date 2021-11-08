@@ -32,18 +32,18 @@ class Player:
 
     def is_pair(self, hand):
         ranks = [card['rank'] for card in hand]
-        return any(ranks.count(r) == 2 for r in ranks)
+        return any(ranks.count(r) >= 2 for r in ranks)
 
     def is_three(self, hand):
         ranks = [card['rank'] for card in hand]
-        return any(ranks.count(r) == 3 for r in ranks)
+        return any(ranks.count(r) >= 3 for r in ranks)
 
     def is_four(self, hand):
         ranks = [card['rank'] for card in hand]
-        return any(ranks.count(r) == 4 for r in ranks)
+        return any(ranks.count(r) >= 4 for r in ranks)
 
     def is_two_pairs(self, hand):
         ranks = [card['rank'] for card in hand]
-        counts = ranks.count(r for r in ranks)
-        return counts.count(2) == 2
+        counts = set(ranks.count(r) for r in ranks)
+        return len([c for c in counts if c >= 2]) >= 2
         
