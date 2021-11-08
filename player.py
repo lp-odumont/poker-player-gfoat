@@ -1,6 +1,6 @@
 
 class Player:
-    VERSION = "Default Python folding player"
+    VERSION = "Greatest Folder of all times v0.0.1"
 
     def betRequest(self, game_state):
         return 0
