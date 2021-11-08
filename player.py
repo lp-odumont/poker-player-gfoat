@@ -14,10 +14,13 @@ class Player:
         pass
 
     def strength(self, hand):
+        
         if self.is_four(hand):
             return 64
         if self.is_full_house(hand):
             return 32
+        if self.is_flush(hand):
+            return 20
         if self.is_straight(hand):
             return 16
         if self.is_three(hand):
@@ -85,5 +88,4 @@ class Player:
         suits = [card['suit'] for card in hand]
         counts = [suits.count(s) for s in set(suits)]
         return any(c >= 5 for c in counts)
-        
         
