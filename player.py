@@ -1,6 +1,6 @@
 
 class Player:
-    VERSION = "Greatest Folder of all times v0.0.4"
+    VERSION = "Greatest Folder of all times v0.0.5"
 
     def betRequest(self, game_state):
         own_card = game_state['players'][game_state['in_action']]["hole_cards"]
