@@ -30,3 +30,20 @@ class Player:
     def showdown(self, game_state):
         pass
 
+    def is_pair(self, hand):
+        ranks = [card['rank'] for card in hand]
+        return any(ranks.count(r) == 2 for r in ranks)
+
+    def is_three(self, hand):
+        ranks = [card['rank'] for card in hand]
+        return any(ranks.count(r) == 3 for r in ranks)
+
+    def is_four(self, hand):
+        ranks = [card['rank'] for card in hand]
+        return any(ranks.count(r) == 4 for r in ranks)
+
+    def is_two_pairs(self, hand):
+        ranks = [card['rank'] for card in hand]
+        counts = ranks.count(r for r in ranks)
+        return counts.count(2) == 2
+        
