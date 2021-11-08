@@ -152,6 +152,20 @@ class PlayerTest(unittest.TestCase):
         self.assertFalse(self.player.is_four(hand3))
         self.assertTrue(self.player.is_two_pairs(hand3))
 
+        hand4 = [
+            {"rank": '10', "suit": 'spades'},
+            {"rank": 'Q', "suit": 'clubs'}, 
+            {"rank": '3', "suit": 'diamonds'},
+            {"rank": '10', "suit": 'hearts'},
+            {"rank": '10', "suit": 'clubs'},
+            {"rank": 'Q', "suit": 'hearts'},
+        ]
+        self.assertTrue(self.player.is_pair(hand4))
+        self.assertTrue(self.player.is_three(hand4))
+        self.assertFalse(self.player.is_four(hand4))
+        self.assertTrue(self.player.is_two_pairs(hand4))
+        self.assertTrue(self.player.is_full_house(hand4))
+
         
 
 if __name__ == "__main__":

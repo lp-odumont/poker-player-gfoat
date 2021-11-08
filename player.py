@@ -57,4 +57,8 @@ class Player:
         unique_ranks = set(ranks)
         counts = [ranks.count(r) for r in unique_ranks]
         return len([c for c in counts if c >= 2]) >= 2
+
+    def is_full_house(self, hand):
+        return self.is_two_pairs(hand) and self.is_three(hand)
+
         
