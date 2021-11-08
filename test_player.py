@@ -115,6 +115,45 @@ class PlayerTest(unittest.TestCase):
         """Test the showdown method."""
         self.player.showdown(game_state=self.game_state_with_community_cards)
 
+    def test_hand_evaluation(self):
+        hand1 = [
+            {"rank": '3', "suit": 'spades'}, 
+            {"rank": 'K', "suit": 'hearts'},
+            {"rank": '3', "suit": 'hearts'},
+        ]
+        
+        self.assertTrue(self.player.is_pair(hand1))
+        self.assertFalse(self.player.is_three(hand1))
+        self.assertFalse(self.player.is_four(hand1))
+        self.assertFalse(self.player.is_two_pairs(hand1))
+
+        hand2 = [
+            {"rank": 'A', "suit": 'spades'},
+            {"rank": '5', "suit": 'clubs'}, 
+            {"rank": 'K', "suit": 'hearts'},
+            {"rank": '5', "suit": 'hearts'},
+            {"rank": '5', "suit": 'spades'},
+            {"rank": '5', "suit": 'diamonds'},
+        ]
+        self.assertTrue(self.player.is_pair(hand2))
+        self.assertTrue(self.player.is_three(hand2))
+        self.assertTrue(self.player.is_four(hand2))
+        self.assertFalse(self.player.is_two_pairs(hand2))
+
+        hand3 = [
+            {"rank": '2', "suit": 'spades'},
+            {"rank": '5', "suit": 'clubs'}, 
+            {"rank": 'K', "suit": 'hearts'},
+            {"rank": '5', "suit": 'hearts'},
+            {"rank": '2', "suit": 'hearts'},
+        ]
+        self.assertTrue(self.player.is_pair(hand3))
+        self.assertFalse(self.player.is_three(hand3))
+        self.assertFalse(self.player.is_four(hand3))
+        self.assertTrue(self.player.is_two_pairs(hand3))
+
+        
+
 if __name__ == "__main__":
     # Automatically executes all test methods (starting with test_) in unittest.TestCase classes
     unittest.main()
