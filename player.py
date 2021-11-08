@@ -5,6 +5,8 @@ class Player:
     def betRequest(self, game_state):
         own_card = game_state['players'][game_state['in_action']]["hole_cards"]
         community_cards = game_state['community_cards']
+        if self.is_garbage(own_card + community_cards):
+            return 0
         if self.is_three(own_card + community_cards):
             return game_state['current_buy_in']*8 - game_state['players'][game_state['in_action']] ['bet']
         if self.is_pair(own_card):
@@ -18,6 +20,9 @@ class Player:
 
     def showdown(self, game_state):
         pass
+
+    def is_garbage(self, hand):
+        return False
 
     def is_pair(self, hand):
         ranks = [card['rank'] for card in hand]
