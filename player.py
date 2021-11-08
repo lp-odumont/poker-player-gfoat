@@ -15,6 +15,10 @@ class Player:
 
     def strength(self, hand):
         if self.is_four(hand):
+            return 7
+        if self.is_full_house(hand):
+            return 6
+        if self.is_straight(hand):
             return 5
         if self.is_three(hand):
             return 4
