@@ -80,5 +80,10 @@ class Player:
             else:
                 run = 0
         return False
+
+    def is_flush(self, hand):
+        suits = [card['suit'] for card in hand]
+        counts = [suits.count(s) for s in set(suits)]
+        return any(c >= 5 for c in counts)
         
         
